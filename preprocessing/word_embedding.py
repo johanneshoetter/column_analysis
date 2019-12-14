@@ -12,7 +12,10 @@ class WordEmbedding(nn.Module):
         self.w2i, self.word_emb_val = word_emb
         
     def forward(self, word):
-        return np.array(self.word_emb_val[self.w2i.get(word)])
+        emb = np.array(self.word_emb_val[self.w2i.get(word)])
+        if emb.shape[0] != 300:
+            emb = np.array(self.word_emb_val[self.w2i.get('_')])
+        return emb
     
 def load_word_emb(data_dir, word2idx_path, usedwordemb_path):
     with open(os.path.join(data_dir, word2idx_path)) as inf:
