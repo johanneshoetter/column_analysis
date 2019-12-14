@@ -31,8 +31,8 @@ class ExtendedWikiSQL(data.Dataset):
             target_suf = [1 if indicator == '1' else 0 for indicator in target] # header
             target_sequence = [0] + target_pre + [0] + target_suf + [0]
             
-            self.inputs.append(torch.Tensor(input_sequence))
-            self.targets.append(torch.LongTensor(target_sequence))
+            self.inputs.append(input_sequence)
+            self.targets.append(target_sequence)
                 
     def load_from_torch(self, path):
         self.inputs = torch.load('{}_inputs.pt'.format(path))
